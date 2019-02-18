@@ -38156,18 +38156,17 @@ var removeToken = function removeToken(state) {
 
 var RequestGithubCode = function RequestGithubCode(state) {
   return [state, (0, _hyperapp.h)(_effects.SetLocation, {
-    location: 'https://github.com/login/oauth/authorize?client_id=' + "development" === 'development' ? "da0d9e8948ca42fa121e" : undefined + '&scope=user'
+    location: 'https://github.com/login/oauth/authorize?client_id=' + ("development" === 'development' ? "da0d9e8948ca42fa121e" : "aa3f3d103fa49456ff44" + '&scope=user')
   })];
 };
 
 var RequestFacebookCode = function RequestFacebookCode(state) {
-  console.log("development" === 'development' ? "da0d9e8948ca42fa121e" : undefined);
+  console.log('https://www.facebook.com/v3.2/dialog/oauth?client_id=' + ("development" === 'development' ? "553813528451746" : "?"));
   var st = Math.random();
   localStorage.setItem('st', st);
-  /*return [
-  	state,
-  	<SetLocation location={'https://www.facebook.com/v3.2/dialog/oauth?client_id='+process.env.FACEBOOK_CLIENT_ID+'&redirect_uri=http://localhost:3000/&state='+st} />
-  ];*/
+  return [state, (0, _hyperapp.h)(_effects.SetLocation, {
+    location: 'https://www.facebook.com/v3.2/dialog/oauth?client_id=' + ("development" === 'development' ? "553813528451746" + '&redirect_uri=http://localhost:3000/' : "?" + '&redirect_uri=https://videochat.ovh/') + '&state=' + st
+  })];
 };
 
 var testCode = function testCode(init) {
@@ -38522,7 +38521,11 @@ var pages = {
   NotFound: require("_bundle_loader")(require.resolve('./NotFound'))
 };
 exports.pages = pages;
-console.log('env : ' + undefined);
+console.log('env : ' + undefined + undefined);
+console.log('env : ' + "da0d9e8948ca42fa121e" + "553813528451746");
+console.log('env : ' + "aa3f3d103fa49456ff44" + "?");
+console.log("development" === 'development' ? "da0d9e8948ca42fa121e" : "aa3f3d103fa49456ff44");
+console.log("development" === 'development' ? "553813528451746" : "?");
 (0, _hyperapp.app)({
   init: (0, _AuthorizedUser.testCode)({
     signingIn: false,
@@ -38597,7 +38600,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39693" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
