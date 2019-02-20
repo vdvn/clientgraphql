@@ -38188,6 +38188,12 @@ var RequestFacebookCode = function RequestFacebookCode(state) {
   })];
 };
 
+var RequestGoogleCode = function RequestGoogleCode(state) {
+  return [state, (0, _hyperapp.h)(_effects.SetLocation, {
+    location: 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/plus.me&client_id=' + ("development" === 'development' ? undefined + '&redirect_uri=https://localhost:3000/' : undefined + '&redirect_uri=https://videochat.ovh/')
+  })];
+};
+
 var testCode = function testCode(init) {
   var stateindex = 0;
 
@@ -38399,7 +38405,10 @@ var _default = function _default(_ref) {
   }, "Sign In with GitHub"), (0, _hyperapp.h)("button", {
     onClick: RequestFacebookCode,
     disabled: signingIn
-  }, "Sign In with Facebook"));
+  }, "Sign In with Facebook"), (0, _hyperapp.h)("button", {
+    onClick: RequestGoogleCode,
+    disabled: signingIn
+  }, "Sign In with Google"));
 };
 
 exports.default = _default;
@@ -38616,7 +38625,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42139" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46399" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
