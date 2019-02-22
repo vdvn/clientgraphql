@@ -37824,6 +37824,7 @@ var UserListItem = function UserListItem(_ref3) {
 
 var ErrorResponse = function ErrorResponse(state, error) {
   return _objectSpread({}, state, {
+    loadingUsers: false,
     error: error
   });
 };
@@ -38137,6 +38138,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var githubAuthMutation = "\n\tmutation githubAuth($code:String!) {\n\t\tgithubAuth(code:$code) { token }\n\t}\n";
 var facebookAuthMutation = "\n\tmutation facebookAuth($code:String!) {\n\t\tfacebookAuth(code:$code) { token }\n\t}\n";
+var googleAuthMutation = "\n\tmutation googleAuth($code:String!) {\n\t\tgoogleAuth(code:$code) { token }\n\t}\n";
 var signupMutation = "\n\tmutation signup($input:SignupInput!) {\n\t\tsignup(input: $input) { token }\n\t}\n";
 var loginMutation = "\nmutation login($input:LoginInput!) {\n\tlogin(input: $input) { token }\n}\n";
 
@@ -38158,6 +38160,17 @@ var facebookAuthorizationComplete = function facebookAuthorizationComplete(state
   }), (0, _hyperapp.h)(_effects.SetlocalStorage, {
     key: "token",
     value: result.facebookAuth.token,
+    action: _Users.refetch
+  })];
+};
+
+var googleAuthorizationComplete = function googleAuthorizationComplete(state, result) {
+  history.replaceState('', '', '/');
+  return [_objectSpread({}, state, {
+    signingIn: false
+  }), (0, _hyperapp.h)(_effects.SetlocalStorage, {
+    key: "token",
+    value: result.googleAuth.token,
     action: _Users.refetch
   })];
 };
@@ -38190,12 +38203,13 @@ var RequestFacebookCode = function RequestFacebookCode(state) {
 
 var RequestGoogleCode = function RequestGoogleCode(state) {
   return [state, (0, _hyperapp.h)(_effects.SetLocation, {
-    location: 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/plus.me&client_id=' + ("development" === 'development' ? undefined + '&redirect_uri=https://localhost:3000/' : undefined + '&redirect_uri=https://videochat.ovh/')
+    location: 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=openid%20email&client_id=402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com&redirect_uri=https://www.videochat.ovh'
   })];
 };
 
 var testCode = function testCode(init) {
   var stateindex = 0;
+  var scopeindex = 0;
 
   if (window.location.search.match(/code=/)) {
     var code = window.location.search.replace('?code=', '');
@@ -38215,6 +38229,18 @@ var testCode = function testCode(init) {
       })];else return _objectSpread({}, init, {
         error: 'states not equal'
       });
+    } else if ((scopeindex = code.indexOf('&scope')) != -1) {
+      code = code.substring(0, scopeindex);
+      return [_objectSpread({}, init, {
+        signingIn: true
+      }), (0, _hyperapp.h)(_effects.RequestGraphql, {
+        query: googleAuthMutation,
+        variables: {
+          code: code
+        },
+        action: googleAuthorizationComplete,
+        error: authorizationError
+      })];
     } else return [_objectSpread({}, init, {
       signingIn: true
     }), (0, _hyperapp.h)(_effects.RequestGraphql, {
@@ -38551,6 +38577,7 @@ var pages = {
 exports.pages = pages;
 console.log('github : ' + ("development" === 'development' ? "da0d9e8948ca42fa121e" : "aa3f3d103fa49456ff44"));
 console.log('facebook : ' + ("development" === 'development' ? "553813528451746" : "364643581024804"));
+console.log('google : ' + ("development" === 'development' ? undefined : "402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com"));
 (0, _hyperapp.app)({
   init: (0, _AuthorizedUser.testCode)({
     signingIn: false,
@@ -38625,7 +38652,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39709" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

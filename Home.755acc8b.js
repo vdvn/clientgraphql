@@ -104,7 +104,23 @@ var parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"Photos.js":[function(require,module,exports) {
+})({"ErrorDisplay.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _hyperapp = require("hyperapp");
+
+var _default = function _default(_ref) {
+  var error = _ref.error;
+  return (0, _hyperapp.h)("div", null, error ? (0, _hyperapp.h)("h4", null, "Error: ".concat(error.message)) : '');
+};
+
+exports.default = _default;
+},{"hyperapp":"../node_modules/hyperapp/src/index.js"}],"Photos.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -147,16 +163,20 @@ exports.default = void 0;
 
 var _hyperapp = require("hyperapp");
 
+var _ErrorDisplay = _interopRequireDefault(require("./ErrorDisplay"));
+
+var _AuthorizedUser = _interopRequireDefault(require("./AuthorizedUser"));
+
 var _Users = _interopRequireDefault(require("./Users"));
 
 var _Photos = _interopRequireDefault(require("./Photos"));
 
-var _AuthorizedUser = _interopRequireDefault(require("./AuthorizedUser"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = function _default(state) {
-  return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(_AuthorizedUser.default, {
+  return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(_ErrorDisplay.default, {
+    error: state.error
+  }), (0, _hyperapp.h)(_AuthorizedUser.default, {
     signingIn: state.signingIn,
     me: state.me,
     loadingUsers: state.loadingUsers,
@@ -172,7 +192,7 @@ var _default = function _default(state) {
 };
 
 exports.default = _default;
-},{"hyperapp":"../node_modules/hyperapp/src/index.js","./Users":"Users.js","./Photos":"Photos.js","./AuthorizedUser":"AuthorizedUser.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"hyperapp":"../node_modules/hyperapp/src/index.js","./ErrorDisplay":"ErrorDisplay.js","./AuthorizedUser":"AuthorizedUser.js","./Users":"Users.js","./Photos":"Photos.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -199,7 +219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39709" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
