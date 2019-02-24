@@ -38200,7 +38200,7 @@ var RequestFacebookCode = function RequestFacebookCode(state) {
   var st = Math.random();
   localStorage.setItem('st', st);
   return [state, (0, _hyperapp.h)(_effects.SetLocation, {
-    location: 'https://www.facebook.com/v3.2/dialog/oauth?client_id=' + ("development" === 'development' ? "553813528451746" + '&redirect_uri=https://localhost:3000/' : "364643581024804" + '&redirect_uri=https://videochat.ovh/') + '&state=' + st
+    location: 'https://www.facebook.com/v3.2/dialog/oauth?client_id=' + ("development" === 'development' ? "553813528451746" + '&redirect_uri=https://localhost:3000/' : "364643581024804" + '&redirect_uri=https://videochat.ovh/') + '&state=' + st + '&scope=email'
   })];
 };
 
@@ -38655,7 +38655,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39335" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41795" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
