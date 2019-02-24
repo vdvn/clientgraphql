@@ -38175,8 +38175,11 @@ var googleAuthorizationComplete = function googleAuthorizationComplete(state, re
   })];
 };
 
-var authorizationError = function authorizationError(state, result) {
-  console.log(result);
+var authorizationError = function authorizationError(state, error) {
+  return _objectSpread({}, state, {
+    signingIn: false,
+    error: error
+  });
 };
 
 var removeToken = function removeToken(state) {
@@ -38585,7 +38588,7 @@ console.log('google : ' + ("development" === 'development' ? undefined : "402792
     totalUsers: 0,
     allUsers: [],
     allPhotos: [],
-    loadingUsers: true,
+    loadingUsers: false,
     me: null,
     postPhoto: {
       name: '',
@@ -38652,7 +38655,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39709" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39335" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
