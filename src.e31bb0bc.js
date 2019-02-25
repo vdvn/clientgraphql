@@ -38206,7 +38206,7 @@ var RequestFacebookCode = function RequestFacebookCode(state) {
 
 var RequestGoogleCode = function RequestGoogleCode(state) {
   return [state, (0, _hyperapp.h)(_effects.SetLocation, {
-    location: 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=openid%20email&client_id=402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com&redirect_uri=https://www.videochat.ovh'
+    location: 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=openid%20email&client_id=' + ("development" === 'development' ? "0" + '&redirect_uri=https://localhost:3000' : "402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com" + '&redirect_uri=https://www.videochat.ovh')
   })];
 };
 
@@ -38580,7 +38580,7 @@ var pages = {
 exports.pages = pages;
 console.log('github : ' + ("development" === 'development' ? "da0d9e8948ca42fa121e" : "aa3f3d103fa49456ff44"));
 console.log('facebook : ' + ("development" === 'development' ? "553813528451746" : "364643581024804"));
-console.log('google : ' + ("development" === 'development' ? undefined : "402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com"));
+console.log('google : ' + ("development" === 'development' ? "0" : "402792612731-945jhtrtr5b85q2ua9rsfmdck47j9vel.apps.googleusercontent.com"));
 (0, _hyperapp.app)({
   init: (0, _AuthorizedUser.testCode)({
     signingIn: false,
@@ -38655,7 +38655,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41795" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38619" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
